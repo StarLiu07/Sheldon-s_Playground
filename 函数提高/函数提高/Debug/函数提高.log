@@ -1,0 +1,5 @@
+﻿  函数重载注意事项.cpp
+E:\repo\Sheldon-s_Playground\函数提高\函数提高\函数重载注意事项.cpp(31,10): error C2668: “func0”: 对重载函数的调用不明确
+E:\repo\Sheldon-s_Playground\函数提高\函数提高\函数重载注意事项.cpp(24,6): message : 可能是“void func0(int)”
+E:\repo\Sheldon-s_Playground\函数提高\函数提高\函数重载注意事项.cpp(19,6): message : 或    “void func0(int,int)”
+E:\repo\Sheldon-s_Playground\函数提高\函数提高\函数重载注意事项.cpp(31,10): message : 尝试匹配参数列表“(int)”时
