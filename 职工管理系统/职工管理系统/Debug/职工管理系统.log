@@ -1,0 +1,8 @@
+﻿  wokermanger.cpp
+E:\repo\Sheldon-s_Playground\职工管理系统\职工管理系统\wokermanger.cpp(93,4): warning C4065: switch 语句包含“default”但是未包含“case”标签
+E:\repo\Sheldon-s_Playground\职工管理系统\职工管理系统\wokermanger.cpp(82,9): warning C4102: “case1”: 未引用的标签
+E:\repo\Sheldon-s_Playground\职工管理系统\职工管理系统\wokermanger.cpp(85,9): warning C4102: “case2”: 未引用的标签
+E:\repo\Sheldon-s_Playground\职工管理系统\职工管理系统\wokermanger.cpp(88,9): warning C4102: “case3”: 未引用的标签
+  职工管理系统.cpp
+  正在生成代码...
+  职工管理系统.vcxproj -> E:\repo\Sheldon-s_Playground\职工管理系统\Debug\职工管理系统.exe
