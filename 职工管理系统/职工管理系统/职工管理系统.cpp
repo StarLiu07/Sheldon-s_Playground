@@ -7,6 +7,9 @@ using namespace std;
 #include "boss.h"
 #include <cstdlib>
 
+
+
+
 int main() {
 
 	////²âÊÔ´úÂë£º

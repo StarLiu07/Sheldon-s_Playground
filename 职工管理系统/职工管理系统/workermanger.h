@@ -2,6 +2,12 @@
 #include<iostream> //标准输入输出流
 using namespace std; //标准命名空间
 #include "worker.h"
+#include "boss.h"
+#include "employee.h"
+#include "manager.h"
+
+#include<fstream>
+#define  FILENAME "empfile.txt"
 
 class workermanger
 {
@@ -24,6 +30,12 @@ public:
 
 	//添加职工
 	void add_emp();
+
+	//保存职工
+	void save();
+
+	//判断文件是否为空 标志
+	bool m_fileisempty;
 
 	//析构函数
 	~workermanger();
