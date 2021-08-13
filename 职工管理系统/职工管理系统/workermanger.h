@@ -37,6 +37,33 @@ public:
 	//判断文件是否为空 标志
 	bool m_fileisempty;
 
+	//统计文件中的人数
+	int get_num();
+
+	//初始化员工
+	void init_emp();
+
+	//显示职工
+	void showemp();
+
+	//删除职工
+	void del_emp();
+
+	//判断职工是否存在，如果存在返回职工所在数组中的位置，不存在返回-1
+	int isexist(int id);
+
+	//修改职工
+	void mod_emp();
+
+	//查找职工
+	void find_emp();
+
+	//按编号排序
+	void sort_emp();
+
+	//清空文件
+	void clean_file();
+
 	//析构函数
 	~workermanger();
 };

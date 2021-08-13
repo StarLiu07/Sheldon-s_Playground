@@ -46,21 +46,27 @@ int main() {
 			break;
 
 		case 2://显示职工
+			wm.showemp();
 			break;
 
 		case 3://删除职工
+			wm.del_emp();
 			break;
 
 		case 4://修改职工
+			wm.mod_emp();
 			break;
 
 		case 5://查找职工
+			wm.find_emp();
 			break;
 
 		case 6://编号排序
+			wm.sort_emp();
 			break;
 
 		case 7://清空文档
+			wm.clean_file();
 			break;
 
 		default:
