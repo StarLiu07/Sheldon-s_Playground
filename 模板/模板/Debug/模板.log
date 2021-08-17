@@ -1,2 +1,2 @@
-﻿MSVCRTD.lib(exe_main.obj) : error LNK2019: 无法解析的外部符号 _main，函数 "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ) 中引用了该符号
-E:\repo\Sheldon-s_Playground\模板\Debug\模板.exe : fatal error LNK1120: 1 个无法解析的外部命令
+﻿  03 类模板案例.cpp
+  模板.vcxproj -> E:\repo\Sheldon-s_Playground\模板\Debug\模板.exe

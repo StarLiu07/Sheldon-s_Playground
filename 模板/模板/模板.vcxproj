@@ -140,10 +140,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="02 类模板与友元.cpp" />
+    <ClCompile Include="03 类模板案例.cpp" />
     <ClCompile Include="person.cpp" />
     <ClCompile Include="01 类模板的分文件编写.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="myarry.hpp" />
     <ClInclude Include="person.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
