@@ -1,0 +1,5 @@
+﻿  功能实现.cpp
+E:\repo\Sheldon-s_Playground\员工管理系统\员工管理系统\功能实现.h(1,13): warning C4081: 应输入“newline”；找到“;”
+E:\repo\Sheldon-s_Playground\员工管理系统\员工管理系统\员工.h(1,13): warning C4081: 应输入“newline”；找到“;”
+E:\repo\Sheldon-s_Playground\员工管理系统\员工管理系统\功能实现.cpp(144,11): warning C4553: “==”: 未使用表达式结果；是否打算使用“=”?
+  员工管理系统.vcxproj -> E:\repo\Sheldon-s_Playground\员工管理系统\x64\Debug\员工管理系统.exe
