@@ -80,18 +80,29 @@ void speechManager::startspeech()
 	this->speechdraw();
 
 	//2.比赛
+	this->speechcontest();
 
 	//3.显示晋级结果
+	this->showscore();
 
 	//第二轮开始比赛
+	this->m_index++;
 	
 	//1.抽签
+	this->speechdraw();
 
 	//2.比赛
+	this->speechcontest();
 
 	//3.显示最终结果
+	this->showscore();
 
 	//4.保存分数到文件中
+	this->saverecord();
+
+	cout << "本届比赛结束" << endl;
+	system("pause");
+	system("cls");
 }
 
 //抽签
@@ -124,6 +135,133 @@ void speechManager::speechdraw()
 
 	cout << "——————————————————" << endl;
 	system("pause");
+}
+//比赛
+void speechManager::speechcontest()
+{
+	cout << "——————第" << this->m_index << "轮比赛正式开始:————————" << endl;
+
+	//准备临时容器 存放小组成绩
+	multimap<double, int, greater<double>> groupscore;
+
+	int num = 0; //用于统计人员个数 6人一组
+
+	vector<int> v_src;//比赛选手容器
+	if (this->m_index == 1)
+	{
+		v_src = v1;
+	}
+	else
+	{
+		v_src = v2;
+	}
+
+	//遍历所有选手进行比赛
+	for (vector<int>::iterator it = v_src.begin(); it != v_src.end(); it++)
+	{
+		num++;
+		//评委打分
+		deque<double> d;
+		for (int i = 0; i < 10; i++)
+		{
+			double score = (rand() % 401 + 600) / 10.f; //600~1000
+			//cout << score << "  ";
+			d.push_back(score);
+		}
+		//cout << endl;
+
+		sort(d.begin(), d.end(), greater<double>()); //排序
+		d.pop_front(); //去除最高分
+		d.pop_back(); //去除最低分
+
+		double sum = accumulate(d.begin(), d.end(), 0.0f); //总分
+		double avg = sum / (double)d.size(); //平均分
+
+		//打印平均分
+		//cout << "编号：" << *it << "姓名：" << this->m_speaker[*it].m_name << "获取平均分：" << avg << endl;
+
+		//将平均分 放入到 map容器里
+		this->m_speaker[*it].m_score[this->m_index] = avg;
+
+		//将打分数据 放入到临时小组容器中
+		groupscore.insert(make_pair(avg, *it)); //key使得分 value是具体选手编号
+		//每6人去除前三名
+		if (num % 6 == 0)
+		{
+			cout << "第" << num / 6 << "小组的比赛名词：" << endl;
+			for (multimap<double, int, greater<double>>::iterator it = groupscore.begin(); it != groupscore.end(); it++)
+			{
+				cout << "编号：" << it->second << "姓名：" << this->m_speaker[it->second].m_name << "成绩："
+					<< this->m_speaker[it->second].m_score[this->m_index] << endl;
+			}
+
+			//取走前三名
+			int count = 0;
+			for (multimap<double, int, greater<double>>::iterator it = groupscore.begin(); it != groupscore.end() && count < 3; it++,count++)
+			{
+				if (this->m_index == 1)
+				{
+					v2.push_back((*it).second);
+				}
+				else
+				{
+					vvicitory.push_back((*it).second);
+				}
+			}
+
+			groupscore.clear(); //小组容器清空
+			cout << endl;
+		}
+	}
+
+	cout << "——————————第" << this->m_index << "轮比赛已完毕——————————" << endl;
+	system("pause");
+
+}
+
+//显示得分
+void speechManager::showscore()
+{
+	cout << "————————第" << this->m_index << "轮晋级选手如下：——————————" << endl;
+
+	vector<int> v;
+	if (this->m_index == 1)
+	{
+		v = v2;
+	}
+	else
+	{
+		v = vvicitory;
+	}
+
+	for (vector<int>::iterator it = v.begin(); it != v.end(); it++)
+	{
+		cout << "选手编号：" << *it << "姓名：" << this->m_speaker[*it].m_name << "得分：" 
+			<< this->m_speaker[*it].m_score[this->m_index] << endl;
+	}
+	cout << endl;
+
+	system("pause");
+	system("cls");
+	this->show_menu();
+}
+
+//保存得分
+void speechManager::saverecord()
+{
+	ofstream ofs;
+	ofs.open("speech.csv", ios::out | ios::app); //用追加的方式写文件
+
+	//将每个选手数据 写入到文件中
+	for (vector<int>::iterator it = vvicitory.begin(); it != vvicitory.end(); it++)
+	{
+		ofs << *it << "," << this->m_speaker[*it].m_score[1] << ",";
+	}
+	ofs << endl;
+
+	//关闭
+	ofs.close();
+	cout << "记录已经保存" << endl;
 }
 
 

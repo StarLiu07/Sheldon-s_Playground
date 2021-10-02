@@ -5,6 +5,10 @@ using namespace std;
 #include <map>
 #include "speaker.h"
 #include <algorithm>
+#include <deque>
+#include <functional>
+#include <numeric>
+#include <fstream>
 
 /*
 * 功能描述：
@@ -41,6 +45,15 @@ public:
 
 	//抽签
 	void speechdraw();
+
+	//比赛
+	void speechcontest();
+
+	//显示得分
+	void showscore(); 
+
+	//保存得分
+	void saverecord();
 
 	//成员属性
 	//保存第一轮比赛选手的容器
