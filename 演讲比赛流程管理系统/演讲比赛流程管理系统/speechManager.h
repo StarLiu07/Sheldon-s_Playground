@@ -55,6 +55,18 @@ public:
 	//保存得分
 	void saverecord();
 
+	//读取记录
+	void loadrecord();
+
+	//显示往届记录
+	void showrecord();
+
+	//判断文件是否为空
+	bool fileisempty;
+
+	//存放往届记录的容器
+	map<int, vector<string>>m_record;
+
 	//成员属性
 	//保存第一轮比赛选手的容器
 	vector<int> v1;

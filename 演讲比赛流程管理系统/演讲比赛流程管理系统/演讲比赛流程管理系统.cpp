@@ -28,6 +28,7 @@ int main() {
 			sm.startspeech();
 			break;
 		case 2: //查看往届记录
+			sm.showrecord();
 			break;
 		case 3: //清空比赛记录
 			break;
