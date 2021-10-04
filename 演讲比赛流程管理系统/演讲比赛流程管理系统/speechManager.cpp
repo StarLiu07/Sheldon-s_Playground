@@ -45,6 +45,9 @@ void speechManager::initspeech()
 
 	//初始化比赛轮数
 	this->m_index = 1;
+
+	//初始化记录容器
+	this->m_record.clear();
 }
 
 //创建12名选手
@@ -103,9 +106,24 @@ void speechManager::startspeech()
 	//4.保存分数到文件中
 	this->saverecord();
 
+	//重置比赛，获取记录
+	//初始化容器和属性
+	//this->initspeech();
+	this->m_index = 1;
+
+	//创建12名选手
+	this->createspeaker();
+
+	//加载往届记录
+	this->loadrecord();
+
+
+
 	cout << "本届比赛结束" << endl;
 	system("pause");
 	system("cls");
+
+
 }
 
 //抽签
@@ -244,6 +262,8 @@ void speechManager::showscore()
 	}
 	cout << endl;
 
+	//this->loadrecord();
+
 	system("pause");
 	system("cls");
 	this->show_menu();
@@ -265,6 +285,9 @@ void speechManager::saverecord()
 	//关闭
 	ofs.close();
 	cout << "记录已经保存" << endl;
+
+	//更改文件不为空状态
+	this->fileisempty = false;
 }
 
 //读取记录
@@ -274,7 +297,7 @@ void speechManager::loadrecord()
 	if (!ifs.is_open())
 	{
 		this->fileisempty = true;
-		cout << "文件不存在" << endl;
+		//cout << "文件不存在" << endl;
 		ifs.close();
 		return;
 	}
@@ -284,7 +307,7 @@ void speechManager::loadrecord()
 	ifs >> ch;
 	if (ifs.eof())
 	{
-		cout << "文件为空" << endl;
+		//cout << "文件为空" << endl;
 		this->fileisempty = true;
 		ifs.close();
 		return;
@@ -337,14 +360,63 @@ void speechManager::loadrecord()
 //显示往届记录
 void speechManager::showrecord()
 {
-	for (int i = 0; i < this->m_record.size(); i++)
+	if (this->fileisempty)
 	{
-		cout << "第" << i + 1 << "届"
-			<< "冠军编号：" << this->m_record[i][0] << "得分：" << this->m_record[i][1] << "  "
-			<< "亚军编号：" << this->m_record[i][2] << "得分：" << this->m_record[i][3] << "  "
-			<< "季军编号：" << this->m_record[i][3] << "得分：" << this->m_record[i][5] << endl;
+		cout << "文件为空或文件不存在" << endl;
+	}
+	else
+	{
+		for (int i = 0; i < this->m_record.size(); i++)
+		{
+			cout << "第" << i + 1 << "届"
+				<< "冠军编号：" << this->m_record[i][0] << "得分：" << this->m_record[i][1] << "  "
+				<< "亚军编号：" << this->m_record[i][2] << "得分：" << this->m_record[i][3] << "  "
+				<< "季军编号：" << this->m_record[i][3] << "得分：" << this->m_record[i][5] << endl;
+		}
 	}
 
+	////重置比赛，获取记录
+	////初始化容器和属性
+	//this->initspeech();
+
+	////创建12名选手
+	//this->createspeaker();
+
+	////加载往届记录
+	//this->loadrecord();
+
+	system("pause");
+	system("cls");
+}
+
+//清空文件按
+void speechManager::clearRecord()
+{
+	cout << "是否确定清空文件？" << endl;
+	cout << "1.是" << endl;
+	cout << "2.否" << endl;
+
+	int select = 0;
+
+	cin >> select;
+
+	if (select == 1)
+	{
+		//确认清空
+		ofstream ofs("speech.csv", ios::trunc);
+		ofs.close();
+
+		//初始化容器和属性
+		this->initspeech();
+
+		//创建12名选手
+		this->createspeaker();
+
+		//加载往届记录
+		this->loadrecord();
+
+		cout << "清空成功" << endl;
+	}
 	system("pause");
 	system("cls");
 }

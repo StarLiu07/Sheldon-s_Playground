@@ -61,6 +61,9 @@ public:
 	//显示往届记录
 	void showrecord();
 
+	//清空文件按
+	void clearRecord();
+
 	//判断文件是否为空
 	bool fileisempty;
 
