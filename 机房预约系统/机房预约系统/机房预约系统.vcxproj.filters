@@ -18,5 +18,31 @@
     <ClCompile Include="机房预约系统.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="student.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="teacher.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="manager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="identity.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="student.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="teacher.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="manager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="globalfile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
