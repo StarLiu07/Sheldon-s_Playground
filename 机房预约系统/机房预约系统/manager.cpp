@@ -13,7 +13,7 @@ Manager::Manager(string name, string pwd)
 }
 
 //²Ëµ¥½çÃæ
-void Manager::operMeny()
+void Manager::opermenu()
 {
 
 }

@@ -15,7 +15,7 @@ public:
 	Manager(string name,string pwd);
 
 	//菜单界面
-	virtual void operMeny();
+	virtual void opermenu();
 
 	//添加账号
 	void addperson();
