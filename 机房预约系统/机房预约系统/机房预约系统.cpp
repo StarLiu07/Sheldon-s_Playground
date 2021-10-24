@@ -7,6 +7,54 @@ using namespace std;
 #include "teacher.h"
 #include "manager.h"
 
+//进入管理员子菜单界面
+void managerMenu(Identity*& manager)
+{
+	while (true)
+	{
+		//调用管理员子菜单
+		manager->opermenu();
+
+		//将父类指针 转为子类指针，调用子类里其他接口
+		Manager* man = (Manager*)manager;
+
+		int select = 0;
+
+		//接受用户选择
+		cin >> select;
+
+		if (select == 1) //添加账号
+		{
+			cout << "添加账号" << endl;
+			man->addperson();
+		}
+		else if (select == 2) //查看账号
+		{
+			cout << "查看账号" << endl;
+			man->showperson();
+		}
+		else if (select == 3) //查看机房信息
+		{
+			cout << "查看机房" << endl;
+			man->showcomputer();
+		}
+		else if (select == 4) //清空预约
+		{
+			cout << "清空预约" << endl;
+			man->cleanfile();
+		}
+		else
+		{
+			//注销登录
+			delete manager; //销毁堆区对象
+			cout << "注销成功" << endl;
+			system("pause");
+			system("cls");
+			return;
+		}
+	}
+}
+
 //登录功能  参数1 操作文件名称  参数2 操作身份类型
 void LoginIn(string fileName, int type)
 {
@@ -110,6 +158,7 @@ void LoginIn(string fileName, int type)
 				person = new Manager(name, pwd);
 
 				//进入管理员子菜单界面
+				managerMenu(person);
 
 				return;
 			}

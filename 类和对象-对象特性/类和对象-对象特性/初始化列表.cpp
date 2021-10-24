@@ -35,7 +35,7 @@ void newexam1()
 	cout << "a的值为：" << p.m_a << " b的值为：" << p.m_b << " c的值为：" << p.m_c << endl;
 }
 
-int main() {
+int main6() {
 
 	newexam1();
 
