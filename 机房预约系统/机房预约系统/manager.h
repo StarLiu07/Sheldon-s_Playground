@@ -7,6 +7,8 @@ using namespace std;
 #include <vector>
 #include "student.h"
 #include "teacher.h"
+#include <algorithm>
+#include "computerRoom.h"
 
 //管理员类
 class Manager : public Identity
@@ -45,4 +47,7 @@ public:
 
 	//教师容器
 	vector<Teacher> vTea;
+
+	//机房信息容器
+	vector<ComputerRoom> vCom;
 };

@@ -145,6 +145,7 @@
     <ClCompile Include="机房预约系统.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="computerRoom.h" />
     <ClInclude Include="globalfile.h" />
     <ClInclude Include="identity.h" />
     <ClInclude Include="manager.h" />

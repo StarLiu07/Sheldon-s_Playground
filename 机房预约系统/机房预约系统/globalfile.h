@@ -9,4 +9,4 @@
 //机房信息文件
 #define COMPUTER_FILE "computerRoom.txt"
 //订单文件
-#define REDER_FILE "order.txt"
+#define ORDER_FILE "order.txt"

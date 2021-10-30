@@ -25,22 +25,22 @@ void managerMenu(Identity*& manager)
 
 		if (select == 1) //添加账号
 		{
-			cout << "添加账号" << endl;
+			//cout << "添加账号" << endl;
 			man->addperson();
 		}
 		else if (select == 2) //查看账号
 		{
-			cout << "查看账号" << endl;
+			//cout << "查看账号" << endl;
 			man->showperson();
 		}
 		else if (select == 3) //查看机房信息
 		{
-			cout << "查看机房" << endl;
+			//cout << "查看机房" << endl;
 			man->showcomputer();
 		}
 		else if (select == 4) //清空预约
 		{
-			cout << "清空预约" << endl;
+			//cout << "清空预约" << endl;
 			man->cleanfile();
 		}
 		else

@@ -15,6 +15,18 @@ Manager::Manager(string name, string pwd)
 
 	//初始化容器 获取到所有文件中 学生、老师信息
 	this->initVector();
+
+	//初始化机房信息
+	ifstream ifs;
+	ifs.open(COMPUTER_FILE, ios::in);
+
+	ComputerRoom com;
+	while (ifs >> com.m_ComId && ifs >> com.m_MaxNum)
+	{
+		vCom.push_back(com);
+	}
+	ifs.close();
+	cout << "机房的数量为：" << vCom.size() << endl;
 }
 
 //菜单界面
@@ -106,24 +118,71 @@ void Manager::addperson()
 	system("cls");
 	
 	ofs.close();
+
+	//调用初始化容器接口，重新获取文件中的数据
+	this->initVector();
+}
+
+//打印学生
+void printStudent(Student& s)
+{
+	cout << "学号：" << s.m_id << "\t姓名：" << s.m_name << "\t密码：" << s.m_Pwd << endl;
+}
+
+//打印老师
+void printTeacher(Teacher& t)
+{
+	cout << "职工号：" << t.m_empid << "\t姓名：" << t.m_name << "\t密码：" << t.m_Pwd << endl;
 }
 
 //查看账号
 void Manager::showperson() 
 {
+	cout << "请选择查看的内容：" << endl;
+	cout << "1.查看所有的学生" << endl;
+	cout << "2.查看所有的老师" << endl;
 
+	int select = 0; //接受用户选择
+	cin >> select;
+
+	if (select == 1)
+	{
+		//查看学生
+		cout << "所有学生信息如下：" << endl;
+		for_each(vStu.begin(), vStu.end(), printStudent);
+	}
+	else
+	{
+		//查看老师
+		cout << "所有老师的信息如下：" << endl;
+		for_each(vTea.begin(), vTea.end(), printTeacher);
+	}
+
+	system("pause");
+	system("cls");
 }
 
 //查看机房信息
 void Manager::showcomputer()
 {
-
+	cout << "机房信息如下：" << endl;
+	for (vector<ComputerRoom>::iterator it = vCom.begin(); it != vCom.end(); it++)
+	{
+		cout << "机房编号为：" << it->m_ComId << "机房最大容量：" << it->m_MaxNum << endl;
+	}
+	system("pause");
+	system("cls");
 }
 
 //清空预约记录
 void Manager::cleanfile()
 {
+	ofstream ofs(ORDER_FILE, ios::trunc);
+	ofs.close();
 
+	cout << "清空成功" << endl;
+	system("pause");
+	system("cls");
 }
 
 void Manager::initVector()
@@ -147,7 +206,7 @@ void Manager::initVector()
 		vStu.push_back(s);
 	}
 
-	//cout << "当前学生数量为：" << vStu.size() << endl;
+	cout << "当前学生数量为：" << vStu.size() << endl;
 	ifs.close();
 
 	//读取信息  老师
@@ -158,7 +217,7 @@ void Manager::initVector()
 		vTea.push_back(t);
 	}
 
-	//cout << "当前老师数量为：" << vTea.size() << endl;
+	cout << "当前老师数量为：" << vTea.size() << endl;
 	ifs.close();
 }
 
