@@ -7,6 +7,46 @@ using namespace std;
 #include "teacher.h"
 #include "manager.h"
 
+//进入学生子菜单界面
+void studentMenu(Identity*& student)
+{
+	while (true)
+	{
+		//调用学生子菜单
+		student->opermenu();
+
+		Student* stu = (Student*)student;
+
+		int select = 0;
+		cin >> select;//接受用户选择
+
+		if (select == 1)//申请预约
+		{
+			stu->applyorder();
+		}
+		else if (select == 2)//查看自身预约
+		{
+			stu->showmyorder();
+		}
+		else if (select == 3)//查看所有人预约
+		{
+			stu->showallorder();
+		}
+		else if (select == 4)//取消预约
+		{
+			stu->cancelorder();
+		}
+		else//注销登录
+		{
+			delete student;
+			cout << "注销成功" << endl;
+			system("pause");
+			system("cls");
+			return;
+		}
+	}
+}
+
 //进入管理员子菜单界面
 void managerMenu(Identity*& manager)
 {
@@ -112,7 +152,7 @@ void LoginIn(string fileName, int type)
 				system("cls");
 				person = new Student(id, name, pwd);
 				//进入到学生身份的子菜单
-
+				studentMenu(person);
 
 				return;
 			}
