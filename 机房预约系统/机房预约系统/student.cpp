@@ -127,6 +127,7 @@ void Student::applyorder()
 //查看自身预约
 void Student::showmyorder()
 {
+	OrderFile of;
 
 }
 
