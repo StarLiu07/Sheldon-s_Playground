@@ -101,20 +101,36 @@ OrderFile::OrderFile()
 	ifs.close();
 
 	//测试最大的map容器
-	for (map<int, map<string, string>>::iterator it = m_orderData.begin(); it != m_orderData.end(); it++)
-	{
-		cout << "条数为 = " << it->first << "\tvalue = " << endl;
-		for (map<string, string>::iterator mit = (*it).second.begin(); mit != it->second.end(); mit++)
-		{
-			cout << "key = " << mit->first << "\tvalue = " << mit->second << "\t";
-		}
-		cout << endl;
+	//for (map<int, map<string, string>>::iterator it = m_orderData.begin(); it != m_orderData.end(); it++)
+	//{
+	//	cout << "条数为 = " << it->first << "\tvalue = " << endl;
+	//	for (map<string, string>::iterator mit = (*it).second.begin(); mit != it->second.end(); mit++)
+	//	{
+	//		cout << "key = " << mit->first << "\tvalue = " << mit->second << "\t";
+	//	}
+	//	cout << endl;
 
-	}
+	//}
 }
 
 //更新预约记录
 void OrderFile::updateOrder()
 {
+	if (this->m_Size == 0)
+	{
+		return; //预约记录0条，直接return
+	}
 
+	ofstream ofs(ORDER_FILE, ios::out | ios::trunc);
+	for (int i = 0; i < this->m_Size; i++)
+	{
+		ofs << "date:" << this->m_orderData[i]["date"] << " ";
+		ofs << "interval:" << this->m_orderData[i]["interval"] << " ";
+		ofs << "stuId:" << this->m_orderData[i]["stuId"] << " ";
+		ofs << "stuName:" << this->m_orderData[i]["stuName"] << " ";
+		ofs << "roomId:" << this->m_orderData[i]["roomId"] << " ";
+		ofs << "status:" << this->m_orderData[i]["status"] << endl;
+	}
+
+	ofs.close();
 }
