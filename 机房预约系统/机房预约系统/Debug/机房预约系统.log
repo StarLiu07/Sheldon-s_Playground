@@ -1,3 +1,3 @@
-﻿  student.cpp
-E:\repo\Sheldon-s_Playground\机房预约系统\机房预约系统\student.cpp(94,20): warning C4018: “<”: 有符号/无符号不匹配
+﻿  teacher.cpp
+E:\repo\Sheldon-s_Playground\机房预约系统\机房预约系统\teacher.cpp(117,29): warning C4018: “<=”: 有符号/无符号不匹配
   机房预约系统.vcxproj -> E:\repo\Sheldon-s_Playground\机房预约系统\Debug\机房预约系统.exe
