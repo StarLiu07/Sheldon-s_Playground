@@ -7,10 +7,18 @@ using namespace std;
 #include <conio.h>//控制台输入输出头文件
 
 #define MAPWIDTH 78//地图的宽度
-#define MAPHIGHT 24//地图高度
+#define MAPHEIGHT 24//地图高度
 #define SNAKESIZE 100//蛇的长度
 
+#ifndef __cplusplus
 
+typedef char bool;
+#define false 0
+#define true  1
+
+#endif
+
+int sorce = 0;//记录玩家得分
 
 //食物属性
 struct {
@@ -42,23 +50,12 @@ void gotoxy(int x, int y);
 //控制方向
 void keyDown();
 
+//绘制食物
+void createFood();
 
-int main() {
+//蛇的状态
+bool snakeStatus();
 
-	//绘制一个地图
-	DrawMap();
-
-	while (1)
-	{
-		//控制方向
-		keyDown();
-	}
-
-
-
-	system("pause");
-	return 0;
-}
 
 //将光标移动到控制台的(x,y)坐标点处
 void gotoxy(int x, int y)
@@ -69,20 +66,21 @@ void gotoxy(int x, int y)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
+int i;
 //绘制地图
 void DrawMap()
 {
 	//打印上下框  宽度
-	for (int i = 0; i <= MAPWIDTH;i += 2)//i+2是因为■占两格
+	for (int i = 0; i <= MAPWIDTH; i += 2)//i+2是因为■占两格
 	{
 		gotoxy(i, 0);
 		cout << "■";
-		gotoxy(i, MAPHIGHT);
+		gotoxy(i, MAPHEIGHT);
 		cout << "■";
 	}
 
 	//打印左右边框  
-	for (int i = 1; i < MAPHIGHT; i++)
+	for (int i = 1; i < MAPHEIGHT; i++)
 	{
 		gotoxy(0, i);
 		cout << "■";
@@ -95,7 +93,7 @@ void DrawMap()
 	{
 		srand((unsigned int)time(NULL));
 		food.x = rand() % (MAPWIDTH - 4) + 2;
-		food.y = rand() % (MAPHIGHT - 2) + 1;
+		food.y = rand() % (MAPHEIGHT - 2) + 1;
 
 		if (food.x % 2 == 0)
 		{
@@ -114,7 +112,7 @@ void DrawMap()
 
 	//在屏幕中间生成蛇头
 	snake.x[0] = MAPWIDTH / 2 + 1;
-	snake.y[0] = MAPHIGHT / 2;
+	snake.y[0] = MAPHEIGHT / 2;
 
 	//打印蛇头
 	gotoxy(snake.x[0], snake.y[0]);
@@ -219,3 +217,87 @@ void keyDown()
 	changeFlag = 0;
 	return;
 }
+
+void createFood()
+{
+	if (snake.x[0] == food.x && snake.y[0] == food.y)//蛇头碰到食物
+	{
+		//蛇头碰到食物即为要吃掉这个食物了，因此需要再次生成一个食物
+		while (1)
+		{
+			int flag = 1;
+			srand((unsigned int)time(NULL));
+			food.x = rand() % (MAPWIDTH - 4) + 2;
+			food.y = rand() % (MAPHEIGHT - 2) + 1;
+
+			//随机生成的食物不能在蛇的身体上
+			for (i = 0; i < snake.len; i++)
+			{
+				if (snake.x[i] == food.x && snake.y[i] == food.y)
+				{
+					flag = 0;
+					break;
+				}
+			}
+			//随机生成的食物不能横坐标为奇数，也不能在蛇身，否则重新生成
+			if (flag && food.x % 2 == 0)
+				break;
+		}
+
+		//绘制食物
+		gotoxy(food.x, food.y);
+		printf("￥");
+
+		snake.len++;//吃到食物，蛇身长度加1
+		sorce += 10;//每个食物得10分
+		snake.speed -= 5;//随着吃的食物越来越多，速度会越来越快
+		changeFlag = 1;//很重要，因为吃到了食物，就不用再擦除蛇尾的那一节，以此来造成蛇身体增长的效果
+	}
+	return;
+}
+
+bool snakeStatus()
+{
+	//蛇头碰到上下边界，游戏结束
+	if (snake.y[0] == 0 || snake.y[0] == MAPHEIGHT)
+		return false;
+	//蛇头碰到左右边界，游戏结束
+	if (snake.x[0] == 0 || snake.x[0] == MAPWIDTH)
+		return false;
+	//蛇头碰到蛇身，游戏结束
+	for (i = 1; i < snake.len; i++)
+	{
+		if (snake.x[i] == snake.x[0] && snake.y[i] == snake.y[0])
+			return false;
+	}
+	return true;
+}
+
+int main() {
+
+	//绘制一个地图
+	DrawMap();
+
+	while (1)
+	{
+		snake.speed = 100;
+		//控制方向
+		keyDown();
+		if (!snakeStatus())
+			break;
+		createFood();
+		Sleep(snake.speed);
+	}
+
+
+	gotoxy(MAPWIDTH / 2, MAPHEIGHT / 2);
+	printf("Game Over!\n");
+	gotoxy(MAPWIDTH / 2, MAPHEIGHT / 2 + 1);
+	printf("本次游戏得分为：%d\n", sorce);
+	Sleep(5000);
+	return 0;//欢迎大家到QQ群660142320学习交流
+
+	system("pause");
+	return 0;
+}
+

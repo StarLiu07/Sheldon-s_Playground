@@ -21,6 +21,9 @@ int main()
     //创建蛇
     gs.CreateSnake();
 
-    system("pause");
+    //运行游戏
+    gs.RunGame();
+
+    system("pause>nul");
     return 0;
 }
