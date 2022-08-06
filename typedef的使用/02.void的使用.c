@@ -32,7 +32,8 @@ void test03()
     char* pChar = NULL;
 
     //pChar = pInt;//报错不兼容
-    pChar = (char*)pInt;
+    pChar = (char*)pInt;//把int* 强转为char*
+    pChar = p;//不通过强制类型转换就可以转换为任意类型的指针
 }
 
 int main()
