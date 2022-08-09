@@ -1,0 +1,5 @@
+﻿  main.cpp
+D:\repo\Sheldon-s_Playground\推箱子\推箱子\main.cpp(7,10): fatal error C1083: 无法打开包括文件: “Map.h”: No such file or directory
+  Map.cpp
+D:\repo\Sheldon-s_Playground\推箱子\推箱子\Map.cpp(1,10): fatal error C1083: 无法打开包括文件: “Map.h”: No such file or directory
+  正在生成代码...
