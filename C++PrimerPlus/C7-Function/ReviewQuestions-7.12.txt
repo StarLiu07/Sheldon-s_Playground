@@ -1,0 +1,30 @@
+1.使用函数的三个步骤是什么？
+    1.提供函数定义 2.提供函数原型 3.调用函数
+
+2.请创建与下面的描述匹配的函数原型
+a.igor() 没有参数，且没有返回值
+    void igor();
+b.tofu()接受一个 int 参数，并返回一个 float
+    float tofu(int);
+c.mpg()接受两个 double 参数，并返回一个 double
+    double mpg(double,double);
+d.summation() 将 long 数组名和数组长度作为参数，并返回一个 long 值
+    long summation(long arr[],long size);
+e.doctor()接受一个字符串参数(不能修改该字符串),并返回一个 double 值
+    double doctor(const string);
+f.ofcourse() 将 boss 结构作为参数，不返回值
+    void ofcourse(boss);
+g.plot()将 map 结构的指针作为参数，并返回一个字符串
+    string plot(map *);
+
+3.编写一个接受三个参数的函数：int 数组名、数组长度和一个 int 值，并将数组的所有元素都设置为该 int 值
+    void f3(int arr[],int size,int n)
+    {
+        for(int i = 0;i < size;i++)
+        {
+            arr[i] = n;
+        }
+    }
+
+4.编写一个接受三个参数的函数：指向数组区间中第一个元素的指针、指向数组区间最后一个元素后面的指针以及一个 int 值，
+并将数组中的每个元素都设置为该 int 值
