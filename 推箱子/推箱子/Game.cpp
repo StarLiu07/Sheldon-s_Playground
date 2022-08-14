@@ -111,3 +111,68 @@ int Game::juide(int map[M][N])
 	}
 	return 0;
 }
+
+//更新游戏
+int Game::push(int map[M][N], int offsetX, int offsetY)
+{
+	Postion(map); //确定人物坐标
+	if (map[posX + offsetX][posY + offsetY] == 0) //下一格是空地
+	{
+		map[posX][posY] -= 2;
+		map[posX + offsetX][posY + offsetY] += 2; //下一格变为人或人+终点
+		//改变人的坐标
+		posX += offsetX;
+		posY += offsetY;
+	}
+	else if (map[posX + offsetX][posY + offsetY] == 3) //下一格是箱子
+	{
+		if (map[posX + offsetX * 2][posY + offsetY * 2] == 0
+			|| map[posX + offsetX * 2][posY + offsetY * 2] == 4) //下两格是空地/终点
+		{
+			map[posX][posY] -= 2; //上一格变为空地/终点
+			map[posX + offsetX][posY + offsetY] == 2; //下一格变为人
+			map[posX + offsetX * 2][posY + offsetY * 2] == 3; //下两格变为箱子/箱子+终点
+			posX += offsetX;
+			posY += offsetY;
+		}
+	}
+	else if (map[posX + offsetX][posY + offsetY] == 4) //下一格是终点
+	{
+		map[posX][posY] -= 2;
+		map[posX + offsetX][posY + offsetY] == 6; //下一格变为人+终点
+		posX += offsetX;
+		posY += offsetY;
+	}
+	else if (map[posX + offsetX][posY + offsetY] == 7) //下一格是箱子+终点
+	{
+		if (map[posX + offsetX * 2][posY + offsetY * 2] == 8
+			|| map[posX + offsetX * 2][posY + offsetY * 2] == 4) //下两格是空地/终点
+		{
+			map[posX][posY] -= 2;
+			map[posX + offsetX][posY + offsetY] = 6; //下一格变为人+终点
+			map[posX + offsetX * 2][posY + offsetY * 2] += 3; //下两格变为箱子/箱子+终点
+			posX += offsetX;
+			posY += offsetY;
+		}
+	}
+	else //人物不能移动
+		return 0;
+	return 1;
+}
+
+//找到人物坐标
+void Game::Postion(int map[M][N])
+{
+	for (int i = 0; i < M; i++)
+	{
+		for (int j = 0; j < N; j++)
+		{
+			if (2 == map[i][j] || 6 == map[i][j]) //地图中存在终点/终点+人
+			{
+				//给任务坐标赋值
+				posX = i;
+				posY = j;
+			}
+		}
+	}
+}
