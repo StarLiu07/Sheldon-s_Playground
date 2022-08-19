@@ -1,27 +1,20 @@
-#define _GAEM_H__
-#ifdef _GAEM_H__
-
+#pragma once
 #include <iostream>
 using namespace std;
-#include <string.h>
-#include <conio.h>
-#pragma warning (disable:4996)
-#define N 10
-#define M 10
 
-/***************************建立一个推箱子相关操作的类***********************/
-/*--------------------------Game类编写-----------------------------------*/
-/****************************************************************************/
+//地图长宽
+#define M 10
+#define N 10
+
 class Game
 {
 public:
-	int Move(int map[M][N], char ch);
-	void Drop(int map[M][N],int c);
-	int juide(int map[M][N]);
-private:
-	int push(int map[M][N], int offsetX, int offsetY);
-	void Postion(int map[M][N]);
-	int posX;
-	int posY;
+	//存储人物坐标
+	int Px, Py;
+	//打印地图
+	void ShowMap(int map[M][N]);
+	//人物移动
+	void Move(int map[M][N],char select);
+	//找到人物坐标
+	void FindPlayer(int map[M][N]);
 };
-#endif /*_GAME_H__*/
