@@ -24,7 +24,7 @@ void Game::ShowMap(int map[M][N])
 				cout << "箱";
 				break;
 			case 4: //目标点
-				cout << "P";
+				cout << "点";
 				break;
 			case 5: //箱子+目标点
 				cout << "*";
@@ -59,7 +59,7 @@ void Game::Move(int map[M][N],char select)
 		x = 0; y = 1;
 		break;
 	case 'w':case 'W':
-		x = -1; y = 0;
+		moveUp(map);
 		break;
 	default:
 		break;
@@ -82,5 +82,16 @@ void Game::FindPlayer(int map[M][N])
 				Py = j;
 			}
 		}
+	}
+}
+
+//向上走
+void Game::moveUp(int map[M][N])
+{
+	//前面是空地
+	if (map[Px - 1][Py] == 0)
+	{
+		map[Px - 1][Py] = map[Px][Py]; //移动人物
+		map[Px][Py] = 0; //把人物之前所在的坐标变为0(空地)
 	}
 }
